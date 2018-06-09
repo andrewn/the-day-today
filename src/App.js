@@ -2,25 +2,35 @@ import { h, render, Component } from 'preact';
 import moment from 'moment';
 /** @jsx h */
 
-const Calendar = () => {
-	const m = moment();
-	return (
+const Calendar = ({ date }) => (
 		<time class="calendar">
-			<span class="day">{m.format('ddd')}</span>
-			<span class="date">{m.format('D')}</span>
-			<span class="month">{m.format('MMM')}</span>
-			<span class="year">{m.format('YYYY')}</span>
-      {/* <span class="time">{m.format('HH:mm')}</span> */}
+			<span class="day">{date.format('ddd')}</span>
+			<span class="date">{date.format('D')}</span>
+			<span class="month">{date.format('MMM')}</span>
+			<span class="year">{date.format('YYYY')}</span>
 		</time>
 	);
+
+const BrowserTitle = ({ date }) => {
+	document.querySelector('title').textContent = `📆 ${date.format('ddd D MMM YYYY')} - The Day`
+	return null;
 }
 
 export default class App extends Component {
-    render(props, state) {
+	constructor() {
+		super();
+
+		this.state = {
+			date: moment()
+		}
+	}
+
+  render(props, state) {
 		return (
 			<div class="container">
 				<div class="frame">
-					<Calendar />
+					<BrowserTitle date={state.date} />
+					<Calendar date={state.date} />
 				</div>
 			</div>
 		);
