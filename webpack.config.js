@@ -22,11 +22,10 @@ module.exports = {
     ],
   },
   
-  devServer: {
-    inline: true,
+  serve: {
     host: '0.0.0.0',
     port: 8080,
-    contentBase: path.join(__dirname, 'public')
+    content: path.join(__dirname, 'public')
   },
   
   plugins: [
